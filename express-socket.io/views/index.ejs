@@ -2,8 +2,18 @@
 <html>
   <head>
     <title>Web socket test</title>
+  </head>
+  <body>
+    <h1>Web socket page test</h1>
+    <div id = "container"></div>
+    <div id="me">
+      <form>
+        <input style="width: 250px; height: 35px;" name="last-name" id="data" type="text" value="<%= data %>"/>
+        <input type="button" value="Save" id="save" /> 
+      </form>    
+    </div>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/jquery.js"></script>
+     <script src="jquery.js"></script>
     <script>
       const socket = io.connect('http://localhost:5000')
       socket.on('server-ping', function (data) {
@@ -13,17 +23,15 @@
         container.innerHTML = container.innerHTML + '<h4><span style="color:green">Client say => </span> ' + clientMessage.message + ' </h4>'
         socket.emit('client-pong', clientMessage)
       })
-
-      
+      socket.on('server-save', function (data) {
+        console.log(data)
+        $('#data').val(data.message)
+      })
+      $('#save').on('click', function (evt) {
+        evt.preventDefault()
+        const clientMessage = {message: $('#data').val()}
+        socket.emit('client-save', clientMessage)
+      })
     </script>
-  </head>
-  <body>
-    <h1>Web socket page test</h1>
-    <div id = "container"></div>
-    <div id="me">
-      <form method="post" action="/me">
-          
-      </form>    
-    </div>
   </body>
 </html>

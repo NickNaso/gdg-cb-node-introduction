@@ -24,6 +24,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const http = require('http')
+const path = require('path')
 const socketIO = require('socket.io')
 
 module.exports = function createServer() {
@@ -33,10 +34,7 @@ module.exports = function createServer() {
   const server = http.Server(app)
   const io = socketIO(server)
 
-  const me = {
-    firstName: 'Nicola',
-    lastName: 'Del Gobbo'
-  }
+  let db = "GDG Campobasso - 16/09/2017"
 
   server.listen(5000, function () {
     console.log("Server started on port 5000")
@@ -44,12 +42,16 @@ module.exports = function createServer() {
 
   app.use(morgan('dev'))
 
-  app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/index.html')
-  })
+  app.set('view engine', 'ejs');
+  app.engine('ejs', require('ejs').__express);
+  app.set('views', path.join(__dirname, 'views'));
 
-  app.get('/me', function (req, res) {
-    res.status(200).json(me)
+  app.use('/', express.static(__dirname + '/public'));
+
+  app.get('/', function (req, res) {
+    res.render('index', {
+      data: db
+    })
   })
 
   io.on('connection', function (socket) {
@@ -65,12 +67,9 @@ module.exports = function createServer() {
     })
     socket.on("client-save", (data) => {    
       console.log("New data will be saved")
-      console.log(data)
-      me = {
-        firstName: data.fisrtName,
-        lastName: data.lastName
-      }
-      socket.broadcast.emit("server-save", me)
+      console.log(data.message)
+      db = data.message
+      socket.broadcast.emit("server-save", data)
     })
   })
   
