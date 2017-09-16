@@ -1,0 +1,1 @@
+cmd_Release/myModule.node := c++ -bundle -undefined dynamic_lookup -Wl,-no_pie -Wl,-search_paths_first -mmacosx-version-min=10.7 -arch x86_64 -L./Release -stdlib=libc++  -o Release/myModule.node Release/obj.target/myModule/src/my_module.o 
