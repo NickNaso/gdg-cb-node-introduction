@@ -1,0 +1,23 @@
+{
+  "name": "hello-world",
+  "version": "1.0.0",
+  "description": "Hello world example ",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NickNaso/gdg-cb-node-introduction.git"
+  },
+  "keywords": [
+    "introduction",
+    "nodejs",
+    "javascript",
+    "example"
+  ],
+  "author": "Nicola Del Gobbo <nicoladelgobbo@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/NickNaso/gdg-cb-node-introduction/issues"
+  },
+  "homepage": "https://github.com/NickNaso/gdg-cb-node-introduction#readme"
+}
