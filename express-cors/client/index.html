@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test CORS</title>
+    <script src="jquery.js"></script>
+  </head>
+  <body>
+    <h1>Test page for CORS (Cross-Origin Resource Sharing)</h1>
+    <h3>Application started at http://127.0.0.1:5001</h3>
+    <div><button type="button" id="start" style="font-size: 24px">Start test</button></div>
+    <ul id="result" style="list-style-type: none; margin-top: 30px;"></ul>
+    <script>
+      'use strict'
+      const APIRoot = 'http://127.0.0.1:5000'
+      const APICalls = [
+        {
+          taskName: 'Executing GET call to ' + APIRoot + '/resources',
+          method: 'GET',
+          url: APIRoot + '/resources'
+        },
+        {
+          taskName: 'Executing POST call to ' + APIRoot + '/resources',
+          method: 'POST',
+          url: APIRoot + '/resources'
+        },
+        {
+          taskName: 'Executing PUT call to ' + APIRoot + '/resources/1',
+          method: 'PUT',
+          url: APIRoot + '/resources/1'
+        },
+        {
+          taskName: 'Executing DELETE call to ' + APIRoot + '/resources/1',
+          method: 'DELETE',
+          url: APIRoot + '/resources/1'
+        }
+      ]
+
+      $('#start').on('click', (e) => {
+        let requests = []
+        $('#result').empty()
+        function getResources (call) {
+            return new Promise((resolve, reject) => {
+              $.ajax({
+                url: call.url,
+                method: call.method,
+                dataType: 'json'
+              })
+              .then((data) => {
+                resolve({
+                  taskName: call.taskName,
+                  data: data
+                })
+              })
+              .catch((error) => {
+                reject({
+                  taskName: call.taskName,
+                  error: error
+                })
+              })
+            })
+          }
+
+          requests = APICalls.map(call =>{
+            return getResources(call)
+          })
+
+          requests.reduce((chain, call) => {
+            return chain.then(() => call)
+              .then((response) => { 
+                console.log(response)
+                function parse (data) {
+                  return JSON.stringify(data);
+                }
+                let item = `<li>
+                  <h4>${response.taskName}</h4>
+                  <h5>Response:</h5>
+                  ${parse(response.data)}
+                </li>
+                `
+                $("#result").append(item)
+              })
+              .catch((data) => {
+                let item = `<li>
+                  <h4 style="color:red;">Error happened - ${data.taskName} ... </h4>
+                </li>
+                `
+                $("#result").append(item)
+              })       
+          }, Promise.resolve())        
+      })      
+    </script>
+  </body>
+</html>

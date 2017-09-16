@@ -1,0 +1,51 @@
+{
+  "name": "express-winston-logger",
+  "description": "Simple example to use winton logger in ExpressJS App",
+  "version": "1.0.0",
+  "contributors": [
+    {
+      "name": "Nicola Del Gobbo",
+      "email": "nicoladelgobbo@gmail.com"
+    }
+  ],
+  "keywords": [
+    "expressjs",
+    "winston",
+    "logger",
+    "rest",
+    "logs",
+    "resources"
+  ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NickNaso/gdg-cb-node-introduction.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NickNaso/gdg-cb-node-introduction/issues"
+  },
+  "homepage": "http://www.nacios.it/",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "fs-extra": "^2.0.0",
+    "moment": "^2.17.1",
+    "response-powered-by": "^1.0.3",
+    "response-time": "^2.3.2",
+    "winston": "^2.3.0",
+    "winston-daily-rotate-file": "^1.4.3"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "index.js",
+    "lib/"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "name": "express-cors",
+  "description": "How to handle CORS (Cross-Origin Resource Sharing) in Express.JS Application",
+  "version": "1.0.0",
+  "contributors": [
+    {
+      "name": "Nicola Del Gobbo",
+      "email": "nicoladelgobbo@gmail.com"
+    }
+  ],
+  "keywords": [
+    "expressjs",
+    "cors",
+    "webapp",
+    "rest",
+    "api",
+    "resources"
+  ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "client": "node node_modules/serve/bin/serve.js -p 5001 client",
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NickNaso/gdg-cb-node-introduction.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NickNaso/gdg-cb-node-introduction/issues"
+  },
+  "homepage": "http://www.nacios.it/",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "cors": "^2.8.1",
+    "errorhandler": "^1.5.0",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "response-powered-by": "^1.0.3",
+    "response-time": "^2.3.2",
+    "serve": "^2.4.2",
+    "static": "^2.0.0"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "index.js",
+    "client/"
+  ]
+}
